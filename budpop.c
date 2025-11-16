@@ -60,7 +60,7 @@ main(int argc, char *argv[])
 	struct addrinfo *ai;
 	int fd;
 	const char *cause;
-	for (ai = res; ai != NULL; ai != ai->ai_next) {
+	for (ai = res; ai != NULL; ai = ai->ai_next) {
 		fd = socket(ai->ai_family, ai->ai_socktype, ai->ai_protocol);
 		if (fd == -1) {
 			cause = "socket";
