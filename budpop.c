@@ -87,7 +87,7 @@ main(int argc, char *argv[])
 		err(EXIT_FAILURE, "%s", cause);
 	freeaddrinfo(res);
 
-loop:
+loop:;
 	fd_set rfds;
 	FD_ZERO(&rfds);
 	FD_SET(STDIN_FILENO, &rfds);
