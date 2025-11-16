@@ -1,0 +1,63 @@
+.\"
+.mso ja.tmac
+.Dd 16th November, 2025
+.Dt BUDPOP 1
+.Os TKYTEL LoLLIPoP
+.Sh NAME
+.Nm budpop
+.Nd Belated UDP over Post
+.Sh SYNOPSIS
+.Nm
+.Op Fl b
+.Ar listen
+.Ar destination
+.Ar port
+.Sh DESCRIPTION
+.Nm
+は LoLLIPoP をつかって、
+簡単に気持ちを伝えるためのインタフェイスを提供します。
+より具体的には、
+IPv4 上の UDP を利用した通信により、
+人間向けのメッセージをインタラクティブに送受信できます。
+.Pp
+.Nm
+は UDP の
+.Ar listen
+番ポートでリスンします。
+受信されたデータグラムの内容は標準出力に書き出されます。
+また、
+標準入力から読み込んだ内容を
+.Ar destination
+の
+.Ar port
+番ポートへデータグラムを送信します。
+.Pp
+次のオプションを利用できます。
+.Bl -tag
+.It Fl b
+ブロードキャストを有効にします。
+.El
+.Sh EXIT STATUS
+.Ex -std
+.Sh EXAMPLES
+次は
+.Ql 17707
+番ポートでリスンし、
+ブロードキャストアドレス
+.Ql 192.0.2.255
+の
+.Ql 17707
+番ポートへ送信する例です。
+このコマンドを実行するホスト自身が
+.Ql 192.0.2.0/24
+に属する場合、
+送信した内容は自分に跳ね返ってきます。
+.Dl $ budpop -b 17707 192.0.2.255 17707
+.Sh SEE ALSO
+.Xr lollipop 1 ,
+.Xr ip 7 ,
+.Xr udp 7
+.Sh AUTHORS
+.An KusaReMKN Aq Mt 48670724+KusaReMKN@users.noreply.github.com
+.Sh BUGS
+LoLLIPoP を用いない通信にも利用できます :)
