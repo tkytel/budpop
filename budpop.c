@@ -109,7 +109,7 @@ loop:;
 				(struct sockaddr *)&sin, &sinlen);
 		if (bytes == -1)
 			err(EXIT_FAILURE, "recvfrom");
-		if (write(STDOUT_FILENO, buf, bytes) == -1)
+		if (bytes > 0 && write(STDOUT_FILENO, buf, bytes) == -1)
 			err(EXIT_FAILURE, "stdout");
 	} else {
 		bytes = read(STDIN_FILENO, buf, sizeof(buf));
@@ -128,7 +128,8 @@ loop:;
 				errx(EXIT_FAILURE, "getaddrinfo: %s",
 						gai_strerror(error));
 
-		if (sendto(fd, buf, bytes, 0, res->ai_addr, res->ai_addrlen)
+		if (bytes > 0 && sendto(fd, buf, bytes, 0, res->ai_addr,
+					res->ai_addrlen)
 				== -1)
 			err(EXIT_FAILURE, "sendto");
 
